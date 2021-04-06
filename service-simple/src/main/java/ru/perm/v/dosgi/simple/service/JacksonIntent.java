@@ -8,12 +8,25 @@ import org.osgi.service.component.annotations.Component;
 import java.util.Arrays;
 import java.util.List;
 
-@Component //
-        (//
-                property = {
-                        "org.apache.cxf.dosgi.IntentName=jackson"
-                }
-        )
+/**
+ * Нужен для конвертации People в json
+ * Для указания нужного представления в сервисе указать
+ * <pre>
+ * \@Component(
+ * ....
+ *  property = {
+ *        "service.exported.intents=jackson",
+ *        // By default CXF will favor the default json provider
+ *        "cxf.bus.prop.skip.default.json.provider.registration=true"
+ *  }
+ * )
+ * </pre>
+ */
+@Component(
+        property = {
+                "org.apache.cxf.dosgi.IntentName=jackson"
+        }
+)
 @Slf4j
 public class JacksonIntent implements IntentsProvider {
 
@@ -23,5 +36,4 @@ public class JacksonIntent implements IntentsProvider {
         log.info("getIntents {} {}", this.getClass().getName(), provider);
         return Arrays.asList(provider);
     }
-
 }
