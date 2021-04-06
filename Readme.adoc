@@ -1,0 +1,71 @@
+=== Работа с DOSGI в Karaf
+
+==== Компиляция
+
+[source,bash]
+----
+mvn clean install
+----
+
+==== Модули
+- *api-simple* - Общие для всех зависимости. Модель и интерфейс доступа
+- *service-simple* - Сервис для доступа извне
+- *client-simple* - Клиент
+
+==== Установка
+
+- Установить karaf. Запустить bin/karaf
+- В каталог {karaf-install-catalog}/deploy скопировать setup/feature-blueprint-base.xml
+- Создать инстанс _internet_ (например). В итоге будут запущены 2 java машины
+[source,bash]
+----
+karaf@root()>instance:create internet
+----
+- В каталог {karaf-install-catalog}/instances/internet/deploy скопировать setup/feature-blueprint-base.xml
+- *Установить и запустить zookeeper!!! Без этого ничего не получится!!!* Нужен для discovery сервиса
+[source]
+----
+karaf@root()>feature:install aries-rsa-discovery-zookeeper-server
+karaf@root()>instance:connect internet
+karaf@internet()>feature:install aries-rsa-discovery-zookeeper
+----
+
+Установить бандлы
+[source,bash]
+----
+cp api-simple/bundles/dosgi-api-simple*.jar {karaf-install-catalog}/deploy/
+
+cp api-simple/bundles/dosgi-api-simple*.jar {karaf-install-catalog}/instances/internet/deploy/
+
+cp serice-simple/bundles/dosgi-service-simple*.jar {karaf-install-catalog}/deploy/
+
+cp client-simple/bundles/dosgi-client-simple*.jar {karaf-install-catalog}/instances/internet/deploy/
+----
+
+=== Тестирование
+Все выполнять в консоли karaf
+
+Проверить статус бандлов
+[source]
+----
+karaf@root()>list
+391 │ Active   │  80 │ 1.0.8              │ dosgi-service-simple
+392 │ Active   │  80 │ 1.0.3              │ dosgi-api-simple
+
+karaf@root()>instance:connect internet
+karaf@internet()>list
+340 │ Active │  80 │ 1.0.3              │ dosgi-api-simple
+342 │ Active │  80 │ 1.0.9              │ dosgi-client-simple
+----
+
+Проверка работы
+[source]
+----
+karaf@root()>instance:connect internet
+karaf@internet()>people:list
+People{id=100, name='NAME_100'}
+----
+
+==== Ссылки
+
+- http://liquid-reality.de/Karaf-Tutorial/08/
