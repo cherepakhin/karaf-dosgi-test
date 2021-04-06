@@ -37,6 +37,8 @@
                         </Bundle-SymbolicName>
                         <Import-Package>*</Import-Package>
                         <Export-Package>ru.perm.v.dosgi.simple.client</Export-Package>
+                        <Bundle-Blueprint>OSGI-INF/blueprint/blueprint.xml</Bundle-Blueprint>
+                        <!--                        <Service-Component>OSGI-INF/blueprint/blueprint.xml</Service-Component>-->
                     </instructions>
                     <unpackBundle>true</unpackBundle>
                 </configuration>

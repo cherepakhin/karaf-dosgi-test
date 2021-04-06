@@ -13,14 +13,14 @@ public class PeopleServiceCommandTest {
 
     PeopleService peopleService;
 
-        @Before
+    @Before
     public void setUp() {
-        peopleService= new PeopleServiceStub();
+        peopleService = new PeopleServiceStub();
     }
 
     @Test
     public void list() {
-        peopleService.add(new People(1,"NAME_1"));
+        peopleService.add(new People(1, "NAME_1"));
         PeopleServiceCommand command = new PeopleServiceCommand();
         command.setPeopleService(peopleService);
         command.list();

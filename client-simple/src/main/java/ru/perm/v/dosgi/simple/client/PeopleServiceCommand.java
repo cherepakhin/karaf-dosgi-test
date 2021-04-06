@@ -25,7 +25,16 @@ import java.util.stream.Stream;
         )
 @Slf4j
 public class PeopleServiceCommand {
+
     PeopleService peopleService;
+
+    public PeopleServiceCommand() {
+    }
+
+    public PeopleServiceCommand(PeopleService peopleService) {
+        this.peopleService = peopleService;
+        System.out.println(peopleService.echo("Started"));
+    }
 
     public void test(String mes) {
         System.out.println("test:" + mes);

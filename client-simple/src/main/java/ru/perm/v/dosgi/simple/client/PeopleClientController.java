@@ -1,31 +1,11 @@
 package ru.perm.v.dosgi.simple.client;
 
 import lombok.extern.slf4j.Slf4j;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 import ru.perm.v.dosgi.simple.api.People;
 import ru.perm.v.dosgi.simple.api.PeopleService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-
-//@Component//
-//        (//
-//                immediate = true, //
-//                name = "PeopleClientController", //
-//                property = //
-//                        { //
-//                                "service.exported.interfaces=*", //
-//                                "service.exported.configs=org.apache.cxf.rs", //
-//                                "org.apache.cxf.rs.address=/client", //
-////                                "org.apache.cxf.rs.httpservice.context=/peoples", //
-////                                "org.apache.cxf.rs.provider=true",
-////                                "org.apache.cxf.rs.provider=ru.perm.v.dosgi.simple.api.PeopleService"
-//                                // By default CXF will favor the default json provider
-////                                "cxf.bus.prop.skip.default.json.provider.registration=true"
-//                        } //
-//
-//        )
 
 @Slf4j
 @Path("")
@@ -45,8 +25,10 @@ public class PeopleClientController {
 
     @GET
     @Path("/info")
-    public void info() {
-        log.info("peopleService: {}",peopleService);
+    public String info() {
+        String mes = String.format("peopleService:%s", peopleService);
+        log.info(mes);
+        return mes;
     }
 
     @GET
@@ -85,7 +67,7 @@ public class PeopleClientController {
         return peopleService;
     }
 
-//    @Reference
+    //    @Reference
     public void setPeopleService(PeopleService peopleService) {
         this.peopleService = peopleService;
     }

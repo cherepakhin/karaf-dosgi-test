@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <service-descriptions xmlns="http://www.osgi.org/xmlns/sd/v1.0.0">
     <service-description>
-        <provide interface="ru.perm.v.dosgi.simple.api.PeopleService" />
-        <property name="service.exported.interfaces">ru.perm.v.dosgi.simple.api.PeopleService</property>
+        <provide interface="ru.perm.v.dosgi.simple.api.PeopleService"/>
+        <property name="service.exported.interfaces">ru.perm.v.dosgi.simple.api.PeopleService
+        </property>
         <property name="service.exported.configs">org.apache.cxf.rs</property>
-<!--        Тип преобразователя из json в объект.
-            Преобразователь выбирается через IntentName=jackson, определенный в JacksonIntent-->
+        <!--        Тип преобразователя из json в объект.
+                    Преобразователь выбирается через IntentName=jackson, определенный в JacksonIntent-->
         <property name="service.exported.intents">jackson</property>
         <property name="org.apache.cxf.rs.address">http://localhost:8181/cxf/peoples</property>
     </service-description>

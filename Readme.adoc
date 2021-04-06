@@ -8,21 +8,29 @@ mvn clean install
 ----
 
 ==== Модули
-- *api-simple* - Общие для всех зависимости. Модель и интерфейс доступа
+
+- *api-simple* - Общие для всех зависимости.
+Модель и интерфейс доступа
 - *service-simple* - Сервис для доступа извне
 - *client-simple* - Клиент
 
 ==== Установка
 
-- Установить karaf. Запустить bin/karaf
+- Установить karaf.
+Запустить bin/karaf
 - В каталог {karaf-install-catalog}/deploy скопировать setup/feature-blueprint-base.xml
-- Создать инстанс _internet_ (например). В итоге будут запущены 2 java машины
+- Создать инстанс _internet_ (например).
+В итоге будут запущены 2 java машины
+
 [source,bash]
 ----
 karaf@root()>instance:create internet
 ----
+
 - В каталог {karaf-install-catalog}/instances/internet/deploy скопировать setup/feature-blueprint-base.xml
-- *Установить и запустить zookeeper!!! Без этого ничего не получится!!!* Нужен для discovery сервиса
+- *Установить и запустить zookeeper!!!
+Без этого ничего не получится!!!* Нужен для discovery сервиса
+
 [source]
 ----
 karaf@root()>feature:install aries-rsa-discovery-zookeeper-server
@@ -31,6 +39,7 @@ karaf@internet()>feature:install aries-rsa-discovery-zookeeper
 ----
 
 Установить бандлы
+
 [source,bash]
 ----
 cp api-simple/bundles/dosgi-api-simple*.jar {karaf-install-catalog}/deploy/
@@ -43,7 +52,10 @@ cp client-simple/bundles/dosgi-client-simple*.jar {karaf-install-catalog}/instan
 ----
 
 === Тестирование
-- Проверить статус бандлов. Выполнять в консоли karaf
+
+- Проверить статус бандлов.
+Выполнять в консоли karaf
+
 [source]
 ----
 karaf@root()>list
@@ -57,6 +69,7 @@ karaf@internet()>list
 ----
 
 - Проверка сервиса
+
 [source,bash]
 ----
 bash>http -j http://127.0.0.1:8181/cxf/peoples
@@ -78,13 +91,33 @@ Transfer-Encoding: chunked
 ]
 ----
 
-- Проверка взаимодействия (DOSGI). Выполнять в консоли karaf
+- Проверка взаимодействия (DOSGI).
+Выполнять в консоли karaf
 
 [source]
 ----
 karaf@root()>instance:connect internet
 karaf@internet()>people:list
 People{id=100, name='NAME_100'}
+----
+
+- Проверка REST-запроса на клиента, ктр. вызывает удаленный DOSGI сервис
+
+[source]
+----
+vasi@vasi-note:~/prog/java/osgi/dosgi$ http :8182/cxf/client
+HTTP/1.1 200 OK
+Content-Type: application/json
+Date: Tue, 06 Apr 2021 14:44:32 GMT
+Server: Jetty(9.4.31.v20200723)
+Transfer-Encoding: chunked
+
+[
+    {
+        "id": 100,
+        "name": "NAME_100"
+    }
+]
 ----
 
 ==== Ссылки
