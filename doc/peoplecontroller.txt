@@ -1,0 +1,22 @@
+@startuml
+cloud network
+rectangle "Клиентская JVM" {
+actor Client
+agent PeopleController
+agent DOSGI_клиента
+agent PeopleService
+Client --> PeopleController:get
+PeopleController --> PeopleService:Связано в\nBluePrint
+PeopleService --> DOSGI_клиента:Через\nOSGI-INF/remote-service/*.xml
+}
+DOSGI_клиента->network:json
+
+rectangle "Сервисная JVM" {
+agent DOSGI_сервиса
+agent PeopleServiceImpl
+network->DOSGI_сервиса
+DOSGI_сервиса-up->PeopleServiceImpl:Описано в\nOSGI-INF/blueprint/*.xml
+}
+
+
+@enduml

@@ -1,5 +1,9 @@
 === Работа с DOSGI в Karaf
 
+==== Схема
+
+image::doc/peoplecontroller.png[Схема]
+
 ==== Компиляция
 
 [source,bash]
