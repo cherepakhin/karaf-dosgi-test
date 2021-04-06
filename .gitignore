@@ -1,0 +1,6 @@
+.idea/
+*.iws
+*.iml
+bundles/
+target/
+trunk/
