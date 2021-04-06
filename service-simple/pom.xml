@@ -39,6 +39,7 @@
                         </Bundle-SymbolicName>
                         <Import-Package>*</Import-Package>
                         <Export-Package>ru.perm.v.dosgi.simple.api</Export-Package>
+                        <Service-Component>OSGI-INF/blueprint/services.xml</Service-Component>
                     </instructions>
                 </configuration>
             </plugin>
