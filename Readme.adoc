@@ -43,9 +43,7 @@ cp client-simple/bundles/dosgi-client-simple*.jar {karaf-install-catalog}/instan
 ----
 
 === Тестирование
-Все выполнять в консоли karaf
-
-Проверить статус бандлов
+- Проверить статус бандлов. Выполнять в консоли karaf
 [source]
 ----
 karaf@root()>list
@@ -58,7 +56,30 @@ karaf@internet()>list
 342 │ Active │  80 │ 1.0.9              │ dosgi-client-simple
 ----
 
-Проверка работы
+- Проверка сервиса
+[source,bash]
+----
+bash>http -j http://127.0.0.1:8181/cxf/peoples
+HTTP/1.1 200 OK
+Content-Type: application/json
+Date: Tue, 06 Apr 2021 12:24:01 GMT
+Server: Jetty(9.4.31.v20200723)
+Transfer-Encoding: chunked
+
+[
+    {
+        "id": 100,
+        "name": "NAME_100"
+    },
+    {
+        "id": 101,
+        "name": "nAAA"
+    }
+]
+----
+
+- Проверка взаимодействия (DOSGI). Выполнять в консоли karaf
+
 [source]
 ----
 karaf@root()>instance:connect internet
