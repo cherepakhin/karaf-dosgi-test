@@ -6,8 +6,8 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ru.perm.v</groupId>
-    <artifactId>dosgi-test-parent</artifactId>
+    <groupId>ru.perm.v.dosgi</groupId>
+    <artifactId>dosgi-parent</artifactId>
     <version>1.0.0</version>
 
     <packaging>pom</packaging>
@@ -30,9 +30,11 @@
     </properties>
 
     <modules>
-        <module>api-simple</module>
-        <module>service-simple</module>
-        <module>client-simple</module>
+        <module>api</module>
+        <module>service-impl</module>
+        <module>service-proxy</module>
+        <module>client1-ctrl</module>
+        <module>client2-command</module>
     </modules>
 
     <dependencies>

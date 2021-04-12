@@ -2,7 +2,7 @@
 
 ==== Схема
 
-image::doc/peoplecontroller.png[Схема]
+image::doc/bus.png[Схема]
 
 ==== Компиляция
 
@@ -46,13 +46,19 @@ karaf@internet()>feature:install aries-rsa-discovery-zookeeper
 
 [source,bash]
 ----
-cp api-simple/bundles/dosgi-api-simple*.jar {karaf-install-catalog}/deploy/
+# Настройка сервера
+cp api/bundles/dosgi-api*.jar {karaf-install-catalog}/deploy/
 
-cp api-simple/bundles/dosgi-api-simple*.jar {karaf-install-catalog}/instances/internet/deploy/
+cp service-impl/bundles/dosgi-service-impl*.jar {karaf-install-catalog}/deploy/
 
-cp serice-simple/bundles/dosgi-service-simple*.jar {karaf-install-catalog}/deploy/
+# Настройка клиента
+cp api/bundles/dosgi-api*.jar {karaf-install-catalog}/instances/internet/deploy/
 
-cp client-simple/bundles/dosgi-client-simple*.jar {karaf-install-catalog}/instances/internet/deploy/
+cp service-proxy/bundles/dosgi-service-proxy*.jar {karaf-install-catalog}/instances/internet/deploy/
+
+cp client1-ctrl/bundles/dosgi-client1-ctrl*.jar {karaf-install-catalog}/instances/internet/deploy/
+
+cp client2-command/bundles/dosgi-client2*.jar {karaf-install-catalog}/instances/internet/deploy/
 ----
 
 === Тестирование
@@ -105,7 +111,7 @@ karaf@internet()>people:list
 People{id=100, name='NAME_100'}
 ----
 
-- Проверка REST-запроса на клиента, ктр. вызывает удаленный DOSGI сервис
+- Проверка REST-запроса на клиента, ктр. вызывает удаленный DOSGI сервис. *Порт 8182*
 
 [source]
 ----
@@ -125,5 +131,7 @@ Transfer-Encoding: chunked
 ----
 
 ==== Ссылки
-
+- https://github.com/apache/cxf-dosgi
 - http://liquid-reality.de/Karaf-Tutorial/08/
+- https://cxf.apache.org/dosgi-ds-demo-page.html
+

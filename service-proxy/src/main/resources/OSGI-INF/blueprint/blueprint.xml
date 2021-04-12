@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="
+             http://www.osgi.org/xmlns/blueprint/v1.0.0
+             http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+             ">
+
+    <bean id="jacksonIntent" class="ru.perm.v.dosgi.simple.client.JacksonIntent"/>
+    <service ref="jacksonIntent" interface="org.apache.cxf.dosgi.common.api.IntentsProvider">
+        <service-properties>
+            <entry key="org.apache.cxf.dosgi.IntentName" value="jackson"/>
+        </service-properties>
+    </service>
+
+
+</blueprint>

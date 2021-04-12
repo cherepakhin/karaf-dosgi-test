@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="
+             http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+             ">
+
+
+    <bean id="peopleServiceImpl" class="ru.perm.v.dosgi.simple.service.PeopleServiceImpl"/>
+
+    <!--Это основная настройка экспорта сервиса в DOSGI-->
+    <service ref="peopleServiceImpl" interface="ru.perm.v.dosgi.simple.api.PeopleService">
+        <service-properties>
+            <entry key="service.exported.interfaces"
+                   value="ru.perm.v.dosgi.simple.api.PeopleService"/>
+            <entry key="service.exported.configs" value="org.apache.cxf.rs"/>
+            <entry key="org.apache.cxf.rs.address" value="/peoples"/>
+            <!--            Выбор преобразователя в json.-->
+            <!--            Имя jackson определено в ru.perm.v.dosgi.simple.service.JacksonIntent-->
+            <entry key="service.exported.intents" value="jackson"/>
+            <entry key="cxf.bus.prop.skip.default.json.provider.registration" value="true"/>
+        </service-properties>
+    </service>
+
+    <bean id="jacksonIntent" class="ru.perm.v.dosgi.simple.service.JacksonIntent"/>
+    <service ref="jacksonIntent" interface="org.apache.cxf.dosgi.common.api.IntentsProvider">
+        <service-properties>
+            <entry key="org.apache.cxf.dosgi.IntentName" value="jackson"/>
+        </service-properties>
+    </service>
+
+</blueprint>

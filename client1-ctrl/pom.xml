@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>ru.perm.v.dosgi</groupId>
+        <artifactId>dosgi-parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>dosgi-client1-ctrl</artifactId>
+    <version>1.0.9</version>
+    <packaging>bundle</packaging>
+
+    <dependencies>
+        <!--api-->
+        <dependency>
+            <groupId>ru.perm.v.dosgi</groupId>
+            <artifactId>api</artifactId>
+            <version>1.0.3</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-common</artifactId>
+            <version>2.22.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>2.22.1</version>
+        </dependency>
+
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>4.2.1</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>
+                            ${project.groupId}.${project.artifactId}
+                        </Bundle-SymbolicName>
+                        <Import-Package>*</Import-Package>
+                        <Export-Package>ru.perm.v.dosgi.client1</Export-Package>
+                        <Bundle-Blueprint>OSGI-INF/blueprint/blueprint.xml</Bundle-Blueprint>
+                        <!--                        <Service-Component>OSGI-INF/blueprint/blueprint.xml</Service-Component>-->
+                    </instructions>
+                    <unpackBundle>true</unpackBundle>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>

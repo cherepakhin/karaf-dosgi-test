@@ -1,0 +1,39 @@
+@startuml
+partition JVM1 {
+split
+   -[hidden]->
+   :bundle dosgi-api
+   Публикует зависимости
+   People
+   PeopleService;
+split again
+   -[hidden]->
+   :bundle service-impl
+   Реализация PeopleServiceImpl
+   и публикация сервиса PeopleService;
+end split
+}
+#AAAAAA:Сеть
+обмен в JSON;
+partition JVM2 {
+:bundle service-proxy
+выствляет на шину сервис
+как интерфейс PeopleService через
+OSG-INF/remote-services/remote-service.xml;
+split
+   :bundle dosgi-api
+   Публикует зависимости
+   People
+   PeopleService;
+   kill
+split again
+   :bundle cleint1-ctrl
+   (использует сервис через reference PeopleService);
+   kill
+split again
+   :bundle cleint2-command
+   (использует сервис через reference PeopleService);
+   kill
+end split
+}
+@enduml
