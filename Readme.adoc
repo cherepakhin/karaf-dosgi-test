@@ -78,7 +78,9 @@ karaf@internet()>list
 342 │ Active │  80 │ 1.0.9              │ dosgi-client-simple
 ----
 
-- Проверка сервиса
+==== Проверка сервиса
+
+(Используется утилита httpie.)
 
 [source,bash]
 ----
@@ -101,7 +103,8 @@ Transfer-Encoding: chunked
 ]
 ----
 
-- Проверка взаимодействия (DOSGI).
+==== Проверка клиента client2-command.
+
 Выполнять в консоли karaf
 
 [source]
@@ -111,11 +114,13 @@ karaf@internet()>people:list
 People{id=100, name='NAME_100'}
 ----
 
-- Проверка REST-запроса на клиента, ктр. вызывает удаленный DOSGI сервис. *Порт 8182*
+==== Проверка клиента client1-ctrl
+
+REST-запрос на клиента, ктр. вызывает удаленный DOSGI сервис. *Порт 8182*. (Используется утилита httpie.)
 
 [source]
 ----
-vasi@vasi-note:~/prog/java/osgi/dosgi$ http :8182/cxf/client
+$ http :8182/cxf/client
 HTTP/1.1 200 OK
 Content-Type: application/json
 Date: Tue, 06 Apr 2021 14:44:32 GMT
